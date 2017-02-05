@@ -33,14 +33,18 @@ class FSM {
      * Changes state according to event transition rules.
      * @param event
      */
-    trigger(event) {
-        this.config.initial = event;
+    trigger(event) { // Study
+        let state = getStateByTransition(this.config, event);
+        this.config.initial = state;
+        this.changeState(state);
     }
 
     /**
      * Resets FSM state to initial.
      */
-    reset() {}
+    reset() {
+
+    }
 
     /**
      * Returns an array of states for which there are specified event transition rules.
@@ -48,26 +52,41 @@ class FSM {
      * @param event
      * @returns {Array}
      */
-    getStates(event) {}
+    getStates(event) {
+
+    }
 
     /**
      * Goes back to previous state.
      * Returns false if undo is not available.
      * @returns {Boolean}
      */
-    undo() {}
+    undo() {
+
+    }
 
     /**
      * Goes redo to state.
      * Returns false if redo is not available.
      * @returns {Boolean}
      */
-    redo() {}
+    redo() {
+
+    }
 
     /**
      * Clears transition history
      */
-    clearHistory() {}
+    clearHistory() {
+
+    }
+}
+
+function getStateByTransition(config, transition) {
+    for (let state in config.states) {
+        if (config.states[state].transitions[transition])
+            return config.states[state].transitions[transition];
+    }
 }
 
 module.exports = FSM;
